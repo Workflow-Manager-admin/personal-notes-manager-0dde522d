@@ -1,14 +1,25 @@
 /* CSS Variables for Theme Management */
 :root {
   /* Light theme colors */
-  --bg-primary: #ffffff;
+  --bg-primary: #fff;
   --bg-secondary: #f8f9fa;
+  --sidebar-bg: #f4f6fa;
+  --sidebar-border: #e0e0e0;
   --text-primary: #282c34;
-  --text-secondary: #61dafb;
+  --text-secondary: #424242;
+  --primary: #1976d2;
+  --secondary: #424242;
+  --accent: #ffab00;
   --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --button-bg: #1976d2;
+  --button-bg-alt: #fff;
+  --button-text: #fff;
+  --button-text-alt: #1976d2;
+  --input-bg: #fff;
+  --input-border: #ced4da;
+  --main-area-bg: #ffffff;
 }
+
 
 [data-theme="dark"] {
   /* Dark theme colors */
@@ -37,6 +48,210 @@
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+/* NOTES APP STYLES */
+.notes-app-container {
+  display: flex;
+  height: 100vh;
+  background: var(--bg-primary);
+}
+
+/* Sidebar */
+.notes-sidebar {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+  width: 260px;
+  min-width: 220px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 1.2rem 1rem .5rem 1rem;
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+}
+
+.notes-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.note-list-item {
+  padding: 0.9rem 1rem;
+  margin: 0 .6rem;
+  border-radius: 8px;
+  color: var(--secondary);
+  font-size: 1.05rem;
+  line-height: 1.2;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  transition: background .13s, color .18s;
+}
+
+.note-list-item.selected, .note-list-item:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.new-note-btn {
+  margin: 1rem;
+  margin-top: .6rem;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  background: var(--button-bg-alt);
+  cursor: pointer;
+  font-weight: bold;
+  transition: background .18s, color .18s;
+}
+
+.new-note-btn:hover, .new-note-btn:focus {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* Main Area */
+.notes-main {
+  flex: 1 1 0;
+  padding: 2% 5%;
+  background: var(--main-area-bg);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.note-title-input, .note-body-input {
+  width: 100%;
+  font-size: 1.45rem;
+  padding: .65em 0 0.5em 0;
+  margin-bottom: .6em;
+  border: none;
+  border-bottom: 2px solid var(--primary);
+  color: var(--secondary);
+  background: var(--input-bg);
+  outline: none;
+  resize: none;
+  transition: border .19s;
+}
+
+.note-title-input:focus, .note-body-input:focus {
+  border-bottom: 2.5px solid var(--accent);
+}
+
+.note-body-input {
+  min-height: 10vh;
+  font-size: 1.08rem;
+}
+
+.note-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1em;
+  align-items: center;
+  margin-bottom: 1.25em;
+}
+
+.note-meta-date {
+  font-size: .95em;
+  color: var(--secondary);
+  opacity: 0.75;
+}
+
+.action-btns {
+  display: flex;
+  gap: 0.75em;
+}
+
+.primary-btn, .secondary-btn, .danger-btn {
+  border: none;
+  border-radius: 5px;
+  padding: .42em 1.1em;
+  font-size: 1em;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background .17s, color .17s;
+  margin-right: 0.05em;
+}
+
+.primary-btn {
+  background: var(--primary);
+  color: #fff;
+}
+
+.primary-btn:hover {
+  background: #115399;
+}
+
+.secondary-btn {
+  background: var(--button-bg-alt);
+  color: var(--primary);
+  border: 1.1px solid var(--primary);
+}
+
+.secondary-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.danger-btn {
+  background: #fff;
+  border: 1.2px solid var(--accent);
+  color: var(--accent);
+}
+.danger-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+
+/* Empty state */
+.notes-empty {
+  text-align: center;
+  color: var(--secondary);
+  opacity: .7;
+  margin-top: 8vh;
+  font-size: 1.15rem;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 800px) {
+  .notes-app-container {
+    flex-direction: column;
+  }
+  .notes-sidebar {
+    width: 100vw;
+    min-width: unset;
+    border-right: none;
+    border-bottom: 1.5px solid var(--border-color);
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .sidebar-header {
+    padding: 1rem .5rem 0 .5rem;
+    font-size: 1.05rem;
+  }
+  .notes-list {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    flex: 1;
+  }
+  .note-list-item {
+    padding: .55rem .90rem;
+    font-size: .92rem;
+    border-radius: 7px;
+    margin: .2rem .3rem;
+    min-width: 135px;
   }
 }
 
