@@ -33,6 +33,17 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
+  // DEBUG: Log Supabase environment variables and notes for troubleshooting.
+  useEffect(() => {
+    // Helps debug if env variables are undefined/wrong.
+    // Remove/comment out in production! For local debugging.
+    // eslint-disable-next-line
+    if (!supabaseUrl || !supabaseKey) {
+      // eslint-disable-next-line
+      console.warn("Supabase env vars not set", { supabaseUrl, supabaseKey });
+    }
+  }, []);
+
   // PUBLIC_INTERFACE
   /**
    * Fetch all notes (sorted by last_updated descending).
